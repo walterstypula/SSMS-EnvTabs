@@ -50,6 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CheckUpdatesCommand.cs" />
+    <Compile Include="CloseTabGroupCommand.cs" />
     <Compile Include="ColorConfigPathResolution.cs" />
     <Compile Include="ColorByRegexConfigWriter.cs" />
     <Compile Include="ColorPalette.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="RdtEventManager.Documents.cs" />
     <Compile Include="RdtEventManager.EditorTint.cs" />
     <Compile Include="RdtEventManager.Events.cs" />
+    <Compile Include="RdtEventManager.TabGroups.cs" />
     <Compile Include="SettingsToolWindow.cs" />
     <Compile Include="SettingsToolWindowControl.xaml.cs">
       <DependentUpon>SettingsToolWindowControl.xaml</DependentUpon>

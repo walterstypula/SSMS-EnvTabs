@@ -324,5 +324,47 @@ namespace SSMS_EnvTabs.Tests
             Assert.AreEqual("Production", prodMatch.GroupName);
             Assert.AreEqual(5, prodMatch.ColorIndex);
         }
+
+        [TestMethod]
+        public void ResolveGroupName_ManualMatchTakesPrecedenceOverConnectionRule()
+        {
+            var config = new TabGroupConfig
+            {
+                ManualRegexLines = new List<ManualRegexEntry>
+                {
+                    new ManualRegexEntry { GroupName = "Scratch", Pattern = @"scratch_.*\.sql$" }
+                },
+                ConnectionGroups = new List<TabGroupRule>
+                {
+                    new TabGroupRule { GroupName = "Production", Server = "PROD%", Priority = 10 }
+                }
+            };
+
+            var rules = TabRuleMatcher.CompileRules(config);
+            var manuals = TabRuleMatcher.CompileManualRules(config);
+
+            Assert.AreEqual("Scratch", TabRuleMatcher.ResolveGroupName(rules, manuals, @"C:\temp\scratch_1.sql", "PROD-EAST", "Sales"));
+            Assert.AreEqual("Production", TabRuleMatcher.ResolveGroupName(rules, manuals, @"C:\temp\SQLQuery1.sql", "PROD-EAST", "Sales"));
+        }
+
+        [TestMethod]
+        public void ResolveGroupName_ReturnsNullForUnmatchedOrSilentRules()
+        {
+            var config = new TabGroupConfig
+            {
+                ConnectionGroups = new List<TabGroupRule>
+                {
+                    new TabGroupRule { GroupName = null, Server = "LegacyServer", Priority = 10 },
+                    new TabGroupRule { GroupName = "Production", Server = "PROD%", Priority = 20 }
+                }
+            };
+
+            var rules = TabRuleMatcher.CompileRules(config);
+            var manuals = TabRuleMatcher.CompileManualRules(config);
+
+            Assert.IsNull(TabRuleMatcher.ResolveGroupName(rules, manuals, @"C:\temp\SQLQuery1.sql", "LegacyServer", "master"));
+            Assert.IsNull(TabRuleMatcher.ResolveGroupName(rules, manuals, @"C:\temp\SQLQuery2.sql", "DEV-01", "master"));
+            Assert.IsNull(TabRuleMatcher.ResolveGroupName(rules, manuals, @"C:\temp\SQLQuery3.sql", null, null));
+        }
     }
 }

@@ -166,6 +166,17 @@ namespace SSMS_EnvTabs
             return MatchRule(rules, server, database)?.GroupName;
         }
 
+        /// <summary>
+        /// Resolves the group a tab belongs to, using the same precedence as renaming:
+        /// a manual regex match on the moniker wins, otherwise the connection rule's GroupName.
+        /// Returns null when the tab is not in a named group.
+        /// </summary>
+        public static string ResolveGroupName(IReadOnlyList<CompiledRule> rules, IReadOnlyList<CompiledManualRule> manualRules, string moniker, string server, string database)
+        {
+            string group = MatchManual(manualRules, moniker)?.GroupName ?? MatchGroup(rules, server, database);
+            return string.IsNullOrWhiteSpace(group) ? null : group;
+        }
+
         private static Regex CreateLikeRegexOrNull(string pattern)
         {
             if (string.IsNullOrWhiteSpace(pattern) || !pattern.Contains("%"))

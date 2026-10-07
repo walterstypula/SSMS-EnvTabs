@@ -14,6 +14,7 @@ A Visual Studio Extension for SQL Server Management Studio (SSMS) that automatic
 - **Color-Coded Tabs** - 16 distinct colors to visually separate different environments
 - **Editor Tint** - Optionally blend the group color into the query editor background (off by default, `initialEditorTint` / per-group `enableEditorTint`, intensity via `editorTintStrength`, 1-30%, default 8). The Connection Groups tab previews enabled tints.
 - **Tab Renaming** - Automatically name query tabs with environment names (e.g., "1. Prod", "1. QA")
+- **Close Tab Group** - Right-click a tab and choose "Close All Tabs in '<group>'" (or use the toolbar's Close Group button) to close every open tab matching the same connection group, with the usual save prompt for modified tabs
 - **Auto-Configuration** - Automatically create rules for new connections (retained between sessions)
 - **Manual-Regex** - Add your own regex that you want applied to the ColorByRegexConfig.txt file (retained between sessions)
 

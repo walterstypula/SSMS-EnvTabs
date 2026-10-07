@@ -29,6 +29,7 @@ namespace SSMS_EnvTabs
         public const int cmdidOpenConfig = 0x0103;
         public const int cmdidCheckUpdates = 0x0104;
         public const int cmdidEditActiveConnectionRule = 0x0105;
+        public const int cmdidCloseTabGroup = 0x0108;
 
         private RdtEventManager rdtEventManager;
         internal static SSMS_EnvTabsPackage Instance { get; private set; }
@@ -59,6 +60,7 @@ namespace SSMS_EnvTabs
             await OpenConfigCommand.InitializeAsync(this);
             await CheckUpdatesCommand.InitializeAsync(this);
             await EditActiveConnectionRuleCommand.InitializeAsync(this);
+            await CloseTabGroupCommand.InitializeAsync(this);
 
             UpdateChecker.ScheduleCheck(this, initialConfig?.Settings);
         }

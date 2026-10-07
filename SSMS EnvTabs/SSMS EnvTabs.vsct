@@ -46,6 +46,16 @@
           <ToolTipText>Edit group name and color for the active connection</ToolTipText>
         </Strings>
       </Button>
+      <Button guid="guidSSMS_EnvTabsCmdSet" id="cmdidCloseTabGroup" priority="0x0130" type="Button">
+        <Parent guid="guidSSMS_EnvTabsCmdSet" id="EnvTabsGroup" />
+        <Icon guid="ImageCatalogGuid" id="CloseDocumentGroup" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>IconAndText</CommandFlag>
+        <Strings>
+          <ButtonText>Close Group</ButtonText>
+          <ToolTipText>Close all tabs in the active tab's connection group</ToolTipText>
+        </Strings>
+      </Button>
       <Button guid="guidSSMS_EnvTabsCmdSet" id="cmdidOpenConfigFromDocTab" priority="0x0100" type="Button">
         <Parent guid="guidSSMS_EnvTabsCmdSet" id="EnvTabsDocTabContextGroup" />
         <Icon guid="ImageCatalogGuid" id="Settings" />
@@ -53,6 +63,17 @@
         <Strings>
           <ButtonText>EnvTabs Settings...</ButtonText>
           <ToolTipText>Opens the EnvTabs configuration window</ToolTipText>
+        </Strings>
+      </Button>
+      <!-- Text is replaced at query time to include the group name. -->
+      <Button guid="guidSSMS_EnvTabsCmdSet" id="cmdidCloseTabGroupFromDocTab" priority="0x0110" type="Button">
+        <Parent guid="guidSSMS_EnvTabsCmdSet" id="EnvTabsDocTabContextGroup" />
+        <Icon guid="ImageCatalogGuid" id="CloseDocumentGroup" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>TextChanges</CommandFlag>
+        <Strings>
+          <ButtonText>Close All Tabs in Group</ButtonText>
+          <ToolTipText>Close all tabs in this tab's connection group</ToolTipText>
         </Strings>
       </Button>
     </Buttons>
@@ -68,6 +89,8 @@
       <IDSymbol name="cmdidCheckUpdates" value="0x0104" />
       <IDSymbol name="cmdidEditActiveConnectionRule" value="0x0105" />
       <IDSymbol name="cmdidOpenConfigFromDocTab" value="0x0106" />
+      <IDSymbol name="cmdidCloseTabGroupFromDocTab" value="0x0107" />
+      <IDSymbol name="cmdidCloseTabGroup" value="0x0108" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>
